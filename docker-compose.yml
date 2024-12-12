@@ -1,0 +1,48 @@
+#version: "3.9"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend
+    container_name: django-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - backend/.env
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: react-frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - frontend_data:/frontend
+    env_file:
+      - frontend/.env
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8
+    container_name: mysql-db
+    ports:
+      - "3001:3000"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: proyecto_final
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+  frontend_data:

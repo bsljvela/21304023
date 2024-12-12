@@ -1,0 +1,20 @@
+# Ignorar dependencias de Node.js
+frontend/node_modules
+
+# Ignorar archivos del entorno de desarrollo
+*.env
+*.log
+
+# Ignorar dependencias de Python
+backend/__pycache__/
+*.py[cod]
+
+# Ignorar archivos de Docker que no sean necesarios
+Dockerfile
+docker-compose.yml
+
+# Ignorar carpetas del sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
